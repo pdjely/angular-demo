@@ -1,0 +1,7 @@
+<div>
+  <div *ngFor="let person of personnel">
+    <h3>{{person.rank}}</h3>
+    <p>{{person.firstname}} {{person.surname}}</p>
+    <button (click)="remove(person)">Remove</button>
+  </div>
+</div>

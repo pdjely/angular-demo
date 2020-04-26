@@ -1,0 +1,12 @@
+<div class="input-person-form">
+  <label>Title:
+    <input placeholder="Rank/Title" [(ngModel)]="person.rank"/>
+  </label>
+  <label>Last Name:
+    <input placeholder="Snuffy" [(ngModel)]="person.surname"/>
+  </label>
+  <label>First Name:
+    <input placeholder="Joe" [(ngModel)]="person.firstname"/>
+  </label>
+  <button (click)="addPerson(person); clear()">Add</button>
+</div>
