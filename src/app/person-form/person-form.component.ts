@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Person } from '../person';
 import {RosterModelService} from '../roster-model.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-person-form',
@@ -8,7 +9,11 @@ import {RosterModelService} from '../roster-model.service';
   styleUrls: ['./person-form.component.css']
 })
 export class PersonFormComponent implements OnInit {
-  person: Person = new Person();
+  personForm = new FormGroup({
+    rank: new FormControl('', Validators.required),
+    surname: new FormControl('', Validators.required),
+    firstname: new FormControl('', Validators.required)
+  });
 
   /**
    * Create new form component.
@@ -21,16 +26,16 @@ export class PersonFormComponent implements OnInit {
 
   /**
    * Insert new person into database
-   * @param p Person
    */
-  addPerson(p) {
-    this.rosterService.insertPerson(p);
+  addPerson() {
+    if (this.personForm.valid) {
+      this.rosterService.insertPerson(this.personForm.value);
+      this.personForm.reset();
+    }
   }
 
-  /**
-   * Clear input form and create new Person object for two-way binding
-   */
-  clear() {
-    this.person = new Person();
-  }
+  // Getters for validation
+  get rank() { return this.personForm.get('rank'); };
+  get surname() { return this.personForm.get('surname'); };
+  get firstname() { return this.personForm.get('firstname'); };
 }

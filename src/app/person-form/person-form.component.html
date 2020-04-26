@@ -1,12 +1,33 @@
-<div class="input-person-form">
-  <label>Title:
-    <input placeholder="Rank/Title" [(ngModel)]="person.rank"/>
-  </label>
-  <label>Last Name:
-    <input placeholder="Snuffy" [(ngModel)]="person.surname"/>
-  </label>
-  <label>First Name:
-    <input placeholder="Joe" [(ngModel)]="person.firstname"/>
-  </label>
-  <button (click)="addPerson(person); clear()">Add</button>
-</div>
+<form class="persform" [formGroup]="personForm" (ngSubmit)="addPerson()">
+  <div class="form-group row">
+    <label class="col-4">Title:</label>
+    <div class="col-8">
+      <input type="text" placeholder="Rank/Title" formControlName="rank"/>
+    </div>
+    <span *ngIf="rank.invalid && (rank.touched || rank.dirty)"
+          class="col-12 alert alert-danger" role="alert">Rank is required
+    </span>
+  </div>
+  <div class="form-group row">
+    <label class="col-4">First Name:</label>
+    <div class="col-8">
+      <input type="text" placeholder="Joe" formControlName="firstname"/>
+    </div>
+    <span *ngIf="firstname.invalid && (firstname.touched || firstname.dirty)"
+          class="col-12 alert alert-danger" role="alert">First name is required
+    </span>
+  </div>
+  <div class="form-group row">
+    <label class="col-4">Last Name:</label>
+    <div class="col-8">
+      <input type="text" placeholder="Snuffy" formControlName="surname"/>
+    </div>
+    <span *ngIf="surname.invalid && (surname.touched || surname.dirty)"
+          class="col-12 alert alert-danger" role="alert">Last name is required
+    </span>
+  </div>
+  <button type="submit" class="btn"
+          [ngClass]="{'btn-primary': personForm.valid,
+                      'btn-secondary': personForm.invalid}"
+          [disabled]="personForm.invalid">Add</button>
+</form>

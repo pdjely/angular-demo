@@ -1,7 +1,13 @@
 <div>
-  <div *ngFor="let person of personnel">
-    <h3>{{person.rank}}</h3>
-    <p>{{person.firstname}} {{person.surname}}</p>
-    <button (click)="remove(person)">Remove</button>
+  <div *ngIf="personnel.length == 0">
+    <h3>No Items</h3>
+  </div>
+  <div *ngFor="let person of personnel"
+    class="roster-card">
+    <h3>{{person.rank | uppercase}}</h3>
+    <p class="persname">
+      {{person.firstname | titlecase}} {{person.surname | titlecase}}
+    </p>
+    <button class="btn btn-danger"(click)="remove(person)">Remove</button>
   </div>
 </div>
